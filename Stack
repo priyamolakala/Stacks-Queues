@@ -1,0 +1,62 @@
+# Stacks-Queues
+Problems on Stacks&amp;Queues
+package test2;
+
+
+public class Stack {
+	int capacity;
+	Node top, bottom;
+	int size = 0;
+	public Stack(int capacity) {
+		this.capacity = capacity;
+	}
+
+	public boolean isFull() {
+		return capacity ==  size;
+	}
+	
+	public void join(Node top, Node bottom) {
+		if(bottom!=null) {
+			bottom.top = top;
+		}
+		if(top!=null) {
+			top.bottom = bottom;
+		}
+	}
+	
+	public boolean push(int v) {
+		if(size>capacity) {
+			return false;
+		}
+		size++;
+		Node n = new Node(v);
+		if(size==1) {
+			bottom = n;
+		}
+		join(n,top);
+		top = n;
+		return true;
+	}
+	
+	public int pop() {
+		Node t = top;
+		top = top.bottom;
+		size--;
+		return t.data;
+	}
+	
+	public boolean IsEmpty() {
+		return size == 0;
+	}
+	
+	public int removeBottom() {
+		Node b = bottom;
+		if(bottom!=null) {
+			bottom = bottom.top;
+			size--;
+			bottom.bottom = null;
+			
+		}
+		return b.data;
+	}
+}
